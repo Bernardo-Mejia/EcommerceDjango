@@ -4,7 +4,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import *
-from .controller import authview
+from .controller import authview, cart
 
 urlpatterns = [
     path('', view=home, name='home'),
@@ -15,4 +15,5 @@ urlpatterns = [
     path('register/', authview.register, name="register"),
     path('login/', authview.loginpage, name="loginpage"),
     path('logout/', authview.logoutpage, name="logout"),
+    path('add-to-cart', cart.addtocart, name="addtocart")
 ]
