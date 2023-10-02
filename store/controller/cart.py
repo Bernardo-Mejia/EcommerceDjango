@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -39,3 +39,33 @@ def addtocart(request):
             return redirect('/')
     except Exception as e:
         return JsonResponse({'message': 'Error: ' + str(e), 'status':'error'})
+
+
+def viewcart(request):
+    if request.user.is_authenticated:
+        cart = Cart.objects.filter(user = request.user)
+        context = {"cart": cart}
+        return render(request, "store/cart.html", context)
+    else:
+        messages.error(request, "You must be logged")
+        return redirect("/")
+    
+def updatecart(request):
+    if request.method == "POST":
+        prod_id = int(request.POST.get("product_id"))
+        if(Cart.objects.filter(user=request.user, product_id = prod_id)):
+            prod_qty = int(request.POST.get("product_qty"))
+            cart = Cart.objects.get(user=request.user, product_id = prod_id)
+            cart.product_qty = prod_qty
+            cart.save()
+            return JsonResponse({'message': 'Updated successfully', 'status':'success'})
+    return redirect("/")
+
+def deletecartitem(request):
+    if request.method == "POST":
+        prod_id = int(request.POST.get("product_id"))
+        if(Cart.objects.filter(user=request.user, product_id = prod_id)):
+            cartitem = Cart.objects.get(product_id = prod_id, user = request.user)
+            cartitem.delete()
+            return JsonResponse({'message': 'Deleted successfully', 'status':'success'})
+    return redirect("/")

@@ -61,12 +61,14 @@
         {% if msg.tags == 'success' %}
           alertify.success('{{msg}}');
         {% elif msg.tags == 'info' %}
-          alertify.message('{{msg}}');
+          alertify.notify('{{msg}}');
           {% comment %} alertify.notify('{{msg}}'); {% endcomment %}
         {% elif msg.tags == 'warning' %}
           alertify.warning('{{msg}}');
         {% elif msg.tags == 'error' %}
           alertify.error('{{msg}}');
+        {% else %}
+          alertify.message('{{msg}}');
         {% endif %}
       {% endfor %}
     </script>
