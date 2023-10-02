@@ -6,10 +6,16 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ("user__username", "product__name")
     date_hierarchy = ('created_at')
 
+class WishListAdmin(admin.ModelAdmin):
+    list_display = ('user', "product",)
+    search_fields = ("user__username", "product__name")
+    date_hierarchy = ('created_at')
+
 # Register your models here.
 admin.site.register(models.Category)
 admin.site.register(models.Product)
 admin.site.register(models.Cart, CartAdmin)
+admin.site.register(models.WishList, WishListAdmin)
 
 
 admin.site.site_header = "Admin BGMP"

@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from store.forms import CustomUserForm
 from store.models import Product, Cart
@@ -40,15 +41,15 @@ def addtocart(request):
     except Exception as e:
         return JsonResponse({'message': 'Error: ' + str(e), 'status':'error'})
 
-
+@login_required(login_url="loginpage")
 def viewcart(request):
     if request.user.is_authenticated:
         cart = Cart.objects.filter(user = request.user)
         context = {"cart": cart}
         return render(request, "store/cart.html", context)
-    else:
-        messages.error(request, "You must be logged")
-        return redirect("/")
+    # else:
+    #     messages.error(request, "You must be logged")
+    #     return redirect("/")
     
 def updatecart(request):
     if request.method == "POST":
