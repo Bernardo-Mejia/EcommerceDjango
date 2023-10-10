@@ -15,16 +15,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'collections' %}"><i class="fa fa-th-large" aria-hidden="true"></i> Collections</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'collections' %}active{% endif %}" href="{% url 'collections' %}"><i class="fa fa-th-large" aria-hidden="true"></i> Collections</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}" href="{% url 'cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'wishlist' %}"><i class="fa fa-heart-o" aria-hidden="true"></i> Wish List</a>
+          <a class="nav-link {% if request.resolver_match.url_name == 'wishlist' %}active{% endif %}" href="{% url 'wishlist' %}"><i class="fa fa-heart" aria-hidden="true"></i> Wish List</a>
         </li>
         {% if request.user.is_authenticated %}
           <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
