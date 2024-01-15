@@ -4,7 +4,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import *
-from .controller import authview, cart, wishlist
+from .controller import authview, cart, wishlist, checkout
 
 urlpatterns = [
     path('', view=home, name='home'),
@@ -24,4 +24,6 @@ urlpatterns = [
     path("wishlist", wishlist.index, name="wishlist"),
     path("add-to-wishlist", wishlist.addtowishlist, name="addtowishlist"),
     path("delete-wishlist-item", wishlist.deletewishlist, name="deletewishlist"),
+
+    path("checkout", checkout.index, name="checkout"),
 ]
