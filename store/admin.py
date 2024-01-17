@@ -58,6 +58,8 @@ class OrderItemsAdmin(admin.ModelAdmin):
 admin.site.register(models.Order, OrderAdmin)
 admin.site.register(models.OrderItem, OrderItemsAdmin)
 
+admin.site.register(models.Profile)
+
 
 admin.site.site_header = "Admin BGMP"
 # ?Configurar el título (Administración del sitio)

@@ -21,6 +21,7 @@
                 <input
                   type="text"
                   name="fname"
+                  value = {{ request.user.first_name }}
                   id="firstName"
                   class="form-control"
                   required
@@ -33,6 +34,7 @@
                 <input
                   type="text"
                   name="lname"
+                  value = {{ request.user.last_name }}
                   id="lastName"
                   class="form-control"
                   required
@@ -45,6 +47,7 @@
                 <input
                   type="email"
                   name="email"
+                  value = {{ request.user.email }}
                   id="Email"
                   class="form-control"
                   required
@@ -57,6 +60,7 @@
                 <input
                   type="text"
                   name="phone"
+                  value="{{ userprofile.phone }}"
                   id="Phone"
                   class="form-control"
                   required
@@ -73,7 +77,7 @@
                   class="form-control"
                   required
                   placeholder="Enter Address"
-                ></textarea>
+                >{{ userprofile.address }}</textarea>
               </div>
 
               <div class="col-md-6 mt-2">
@@ -81,6 +85,7 @@
                 <input
                   type="text"
                   name="city"
+                  value="{{ userprofile.city }}"
                   id="City"
                   class="form-control"
                   required
@@ -93,6 +98,7 @@
                 <input
                   type="text"
                   name="state"
+                  value="{{ userprofile.state }}"
                   id="State"
                   class="form-control"
                   required
@@ -105,6 +111,7 @@
                 <input
                   type="text"
                   name="country"
+                  value="{{ userprofile.country }}"
                   id="Country"
                   class="form-control"
                   required
@@ -117,6 +124,7 @@
                 <input
                   type="text"
                   name="pincode"
+                  value="{{ userprofile.pincode }}"
                   id="Pin_Code"
                   class="form-control"
                   required
