@@ -12,6 +12,11 @@ urlpatterns = [
     path('collections/<str:slug>', view=collectionsview, name='collectionsview'),
     path('collection/<str:cat_slug>/<str:prod_slug>', view=productview, name='productview'),
 
+    # ? product-list to SearchBar
+    path('product-list', productListAJAX),
+    # ? search Product from SearchBar
+    path('searchProduct', searchProduct, name="searchProduct"),
+
     path('register/', authview.register, name="register"),
     path('login/', authview.loginpage, name="loginpage"),
     path('logout/', authview.logoutpage, name="logout"),

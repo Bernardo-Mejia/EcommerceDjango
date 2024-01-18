@@ -10,24 +10,43 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"
+    />
     <!-- Default theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"
+    />
+
+    {% comment %} Autocomplete {% endcomment %}
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
     <style>
-      *{
-        font-family: 'Roboto', sans-serif;
+      * {
+        font-family: "Roboto", sans-serif;
       }
       a {
         text-decoration: none;
       }
-      .product-viewtag{
+      .product-viewtag {
         background-color: red;
         color: #fff;
         font-size: 11px;
@@ -41,7 +60,7 @@
         font-weight: 600;
         min-width: 45px;
       }
-      .active{
+      .active {
         font-weight: 800;
       }
     </style>
@@ -49,7 +68,9 @@
   </head>
   <body>
     {% include 'store/inc/navbar.html' %} {% block content %}{% endblock content%}
-    {% comment %} <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script> {% endcomment %}
+    {% comment %}
+      <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script>
+    {% endcomment %}
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{% static '/js/custom.js' %}"></script>
@@ -58,6 +79,26 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    {% comment %} Autocomplete {% endcomment %}
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+          let availableTags = [];
+
+          $.ajax({
+            type: "GET",
+            url: "/product-list",
+            success: function (response) {
+              startAutocomplete(response)
+            },
+          });
+
+          function startAutocomplete(availableTags){
+            $("#searchProducts").autocomplete({
+              source: availableTags
+            });
+          }
+    </script>
 
     <script>
       alertify.set('notifier','position', 'top-right');
@@ -76,8 +117,6 @@
         {% endif %}
       {% endfor %}
     </script>
-    {% block scripts %}
-    
-    {% endblock scripts %}
+    {% block scripts %} {% endblock scripts %}
   </body>
 </html>
